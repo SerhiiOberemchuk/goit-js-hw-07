@@ -1,9 +1,8 @@
 import { galleryItems } from "./gallery-items.js";
-// Change code below this line
 
 /* Creating and rendering markup based on the galleryItems data array
  and the provided gallery item template.*/
-// import * as basicLightbox from "basiclightbox";
+
 const boxForImg = document.querySelector(".gallery");
 const markup = galleryItems
   .map(
@@ -33,4 +32,13 @@ function onclick(evt) {
       <img src="${evt.target.dataset.source}" width="800" height="600">
   `);
   instance.show();
+  // console.log(basicLightbox);
+  document.addEventListener("keydown", onPres);
+  function onPres(evt) {
+    if (evt.code === "Escape") {
+      instance.close();
+      document.removeEventListener("keydown", onPres);
+    }
+    // console.log(evt.code);
+  }
 }
