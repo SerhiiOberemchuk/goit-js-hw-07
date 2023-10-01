@@ -17,18 +17,9 @@ const markup = galleryItems
 </li>`
   )
   .join("");
-
 boxForImg.innerHTML = markup;
 
-boxForImg.addEventListener("click", onclick);
-function onclick(evt) {
-  evt.preventDefault();
-  if (!evt.target.classList.contains("gallery__image")) {
-    return;
-  }
-  const lightbox = new SimpleLightbox(".gallery a", {
-    captionsData: "alt",
-    captionDelay: 250,
-  });
-  //   console.log(lightbox);
-}
+let lightbox = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+});
