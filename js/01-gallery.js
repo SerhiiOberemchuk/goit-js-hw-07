@@ -33,8 +33,7 @@ function modalHandle(e) {
     }
   );
 
-  const closeByEsc = (e) =>
-    e.code === "Escape" ? instance.close() : console.log("df");
+  const closeByEsc = (e) => e.code === "Escape" && instance.close();
   instance.show();
 }
 
