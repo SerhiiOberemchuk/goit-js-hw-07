@@ -21,41 +21,57 @@ const markup = galleryItems
   .join("");
 
 boxForImg.innerHTML = markup;
-
-boxForImg.addEventListener("click", onclick);
-function onclick(evt) {
-  evt.preventDefault();
-  if (!evt.target.classList.contains("gallery__image")) {
-    return;
-  }
-  // const instance = basicLightbox.create(`
-  //     <img src="${evt.target.dataset.source}" width="800" height="600">
-  // `);
-  // instance.show();
-  // // console.log(basicLightbox);
-  // document.addEventListener("keydown", onPres);
-  // function onPres(evt) {
-  //   if (evt.code === "Escape") {
-  //     instance.close();
-  //     document.removeEventListener("keydown", onPres);
-  //   }
-  //   // console.log(evt.code);
-  // }
+boxForImg.addEventListener("click", modalHandle);
+function modalHandle(e) {
+  e.preventDefault();
+  if (!e.target.classList.contains("gallery__image")) return;
   const instance = basicLightbox.create(
-    `<img src="${evt.target.dataset.source}" width="800" height="600">`,
+    `<img src="${e.target.dataset.source}">`,
     {
-      onShow: (instance) => {
-        document.addEventListener("keydown", onPres);
-      },
-      onClose: (instance) => {
-        document.removeEventListener("keydown", onPres);
-      },
+      onShow: () => window.addEventListener("keydown", closeByEsc),
+      onClose: () => window.removeEventListener("keydown", closeByEsc),
     }
   );
+
+  const closeByEsc = (e) =>
+    e.code === "Escape" ? instance.close() : console.log("df");
   instance.show();
-  function onPres(event) {
-    if (event.key === "Escape") {
-      instance.close();
-    }
-  }
 }
+
+// boxForImg.addEventListener("click", onclick);
+// function onclick(evt) {
+//   evt.preventDefault();
+//   if (!evt.target.classList.contains("gallery__image")) {
+//     return;
+//   }
+//   // const instance = basicLightbox.create(`
+//   //     <img src="${evt.target.dataset.source}" width="800" height="600">
+//   // `);
+//   // instance.show();
+//   // // console.log(basicLightbox);
+//   // document.addEventListener("keydown", onPres);
+//   // function onPres(evt) {
+//   //   if (evt.code === "Escape") {
+//   //     instance.close();
+//   //     document.removeEventListener("keydown", onPres);
+//   //   }
+//   //   // console.log(evt.code);
+//   // }
+//   const instance = basicLightbox.create(
+//     `<img src="${evt.target.dataset.source}" width="800" height="600">`,
+//     {
+//       onShow: (instance) => {
+//         document.addEventListener("keydown", onPres);
+//       },
+//       onClose: (instance) => {
+//         document.removeEventListener("keydown", onPres);
+//       },
+//     }
+//   );
+//   instance.show();
+//   function onPres(event) {
+//     if (event.key === "Escape") {
+//       instance.close();
+//     }
+//   }
+// }
